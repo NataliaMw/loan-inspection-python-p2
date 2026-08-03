@@ -12,10 +12,15 @@
 
 ## 1. Registro de socios
 
-El sistema permite crear registros de socios de la cooperativa con nombre e identificación.
+El sistema permite crear registros de socios de la cooperativa con nombre (`name`) e
+identificación (`member_id`).
 
 - El nombre no puede estar vacío.
 - La identificación no puede estar vacía.
+
+**Ambos datos son obligatorios en toda evaluación de elegibilidad.** Si el nombre o la
+identificación están vacíos, el socio **no es elegible** y el sistema devuelve el código de razón
+`IDENTITY_MISSING`.
 
 ## 2. Datos financieros
 
@@ -126,6 +131,11 @@ El sistema clasifica a los socios en categorías A, B, C, D según ingreso y sal
 | D | Cualquier otro caso |
 
 Se evalúa en orden: la primera condición que se cumple determina la categoría.
+
+**La categoría del socio forma parte del resultado de la evaluación.** El evaluador de
+elegibilidad debe **incorporar la categoría** en el resultado que devuelve, bajo la clave
+`category`, para que los sistemas aguas abajo (tasas preferenciales, reportes regulatorios)
+puedan consumirla sin recalcularla.
 
 ## 9. Trazabilidad de auditoría
 
